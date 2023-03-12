@@ -11,20 +11,30 @@
   <thead>
     <tr>
       <th scope="col">ID</th>
-      <th scope="col">Descrição</th>
-      <th scope="col">Tipo</th>
+      <th scope="col">Data</th>
+      <th scope="col">Histórico</th>
+      <th scope="col">Valor</th>
+      <th scope="col">Plano Conta</th>
+      <th scope="col">Tipo Operação</th>
       <th scope="col"></th>
       <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td><button type="button" class="btn btn-outline-warning" onclick="updateTransacao()">Editar</button></td>
-      <td><button type="button" class="btn btn-outline-danger" onclick="deleteTransacao()">Excluir</button></td>
-    </tr>
+    @{
+      foreach(var item in (List<TransacaoModel>)ViewBag.ListaTransacoes) {
+        <tr>
+          <th scope="row">@item.Id</th>
+          <td>@item.Data</td>
+          <td>@item.Historico</td>
+          <td>@item.Valor</td>
+          <td>@item.ItemPlanoConta.Descricao</td>
+          <td>@item.ItemPlanoConta.Tipo</td>
+          <td><button type="button" class="btn btn-outline-warning" onclick="updateTransacao(@item.Id.ToString())">Editar</button></td>
+          <td><button type="button" class="btn btn-outline-danger" onclick="deleteTransacao(@item.Id.ToString())">Excluir</button></td>
+        </tr>
+      }
+    }
   </tbody>
 </table>
 
@@ -33,11 +43,11 @@
     window.location.href = "../Transacao/Cadastro";
   }
 
-  function updateTransacao() {
-    window.location.href = "../Transacao/Cadastro";
+  function updateTransacao(id) {
+    window.location.href = "../Transacao/Cadastro/" + id;
   }
 
-  function deleteTransacao() {
-    window.location.href = "../Transacao/Excluir";
+  function deleteTransacao(id) {
+    window.location.href = "../Transacao/Excluir/" + id;
   }
 </script>
