@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "Transações Financeiras";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="mt-3 mb-3">
+  <button type="button" class="btn btn-primary btn-lg" onclick="createTransacao()">Registrar Transação</button>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Tipo</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td><button type="button" class="btn btn-outline-warning" onclick="updateTransacao()">Editar</button></td>
+      <td><button type="button" class="btn btn-outline-danger" onclick="deleteTransacao()">Excluir</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<script>
+  function createTransacao() {
+    window.location.href = "../Transacao/Cadastro";
+  }
+
+  function updateTransacao() {
+    window.location.href = "../Transacao/Cadastro";
+  }
+
+  function deleteTransacao() {
+    window.location.href = "../Transacao/Excluir";
+  }
+</script>
