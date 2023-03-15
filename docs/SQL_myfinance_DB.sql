@@ -1,11 +1,19 @@
-CREATE DATABASE myfinance
+DROP DATABASE myfinance;
 
-use myfinance
+CREATE DATABASE myfinance;
+
+use myfinance;
 
 CREATE TABLE planoconta(
     id int IDENTITY(1, 1) NOT NULL,
     descricao varchar(50) NOT NULL,
     tipo char(1) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE tipopagamento(
+    id int IDENTITY(1, 1) NOT NULL,
+    tipo text NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -15,8 +23,10 @@ CREATE TABLE transacao(
     valor DECIMAL(9, 2) NOT NULL,
     historico text,
     planocontaid int NOT NULL,
+    tipopagamentoid int NOT NULL,
     PRIMARY KEY(id),
-    FOREIGN KEY (planocontaid) REFERENCES planoconta(id)
+    FOREIGN KEY (planocontaid) REFERENCES planoconta(id),
+    FOREIGN KEY (tipopagamentoid) REFERENCES tipopagamento(id)
 );
 
 INSERT INTO planoconta(descricao, tipo) VALUES ('Combustível', 'D')
@@ -29,14 +39,22 @@ INSERT INTO planoconta(descricao, tipo) VALUES ('Bônus', 'R')
 
 SELECT * FROM planoconta
 
-INSERT INTO transacao(data, valor, historico, planocontaid) VALUES ('2023-01-10 07:47 AM', 100.80, 'Auto Posto Ipiranga', 1)
-INSERT INTO transacao(data, valor, historico, planocontaid) VALUES ('2023-01-16 08:01 AM', 200.34, 'Auto Posto Ipiranga', 1)
-INSERT INTO transacao(data, valor, historico, planocontaid) VALUES ('2023-01-20 01:23 PM', 64.50, 'Mc Donalds', 2)
-INSERT INTO transacao(data, valor, historico, planocontaid) VALUES ('2023-01-15 09:00 AM', 786.30, 'Sul America Saúde', 3)
-INSERT INTO transacao(data, valor, historico, planocontaid) VALUES ('2023-01-05 03:34 PM', 654.87, 'IPTU', 4)
-INSERT INTO transacao(data, valor, historico, planocontaid) VALUES ('2023-01-05 01:23 PM', 59272.87, 'Salário', 5)
-INSERT INTO transacao(data, valor, historico, planocontaid) VALUES ('2023-02-25 10:25 PM', 15847.90, 'Dividendos Google LLC', 6)
-INSERT INTO transacao(data, valor, historico, planocontaid) VALUES ('2023-03-05 01:23 PM', 5452.98, 'Bônus Mensal', 7)
+INSERT INTO tipopagamento(tipo) VALUES ('Dinheiro')
+INSERT INTO tipopagamento(tipo) VALUES ('Débito')
+INSERT INTO tipopagamento(tipo) VALUES ('Pix')
+INSERT INTO tipopagamento(tipo) VALUES ('Crédito')
+INSERT INTO tipopagamento(tipo) VALUES ('Boleto')
+
+SELECT * FROM tipopagamento
+
+INSERT INTO transacao(data, valor, historico, planocontaid, tipopagamentoid) VALUES ('2023-01-10 07:47 AM', 100.80, 'Auto Posto Ipiranga', 1, 1)
+INSERT INTO transacao(data, valor, historico, planocontaid, tipopagamentoid) VALUES ('2023-01-16 08:01 AM', 200.34, 'Auto Posto Ipiranga', 1, 2)
+INSERT INTO transacao(data, valor, historico, planocontaid, tipopagamentoid) VALUES ('2023-01-20 01:23 PM', 64.50, 'Mc Donalds', 2, 3)
+INSERT INTO transacao(data, valor, historico, planocontaid, tipopagamentoid) VALUES ('2023-01-15 09:00 AM', 786.30, 'Sul America Saúde', 3, 4)
+INSERT INTO transacao(data, valor, historico, planocontaid, tipopagamentoid) VALUES ('2023-01-05 03:34 PM', 654.87, 'IPTU', 4, 5)
+INSERT INTO transacao(data, valor, historico, planocontaid, tipopagamentoid) VALUES ('2023-01-05 01:23 PM', 59272.87, 'Salário', 5, 3)
+INSERT INTO transacao(data, valor, historico, planocontaid, tipopagamentoid) VALUES ('2023-02-25 10:25 PM', 15847.90, 'Dividendos Google LLC', 6, 3)
+INSERT INTO transacao(data, valor, historico, planocontaid, tipopagamentoid) VALUES ('2023-03-05 01:23 PM', 5452.98, 'Bônus Mensal', 7, 3)
 
 SELECT * FROM transacao
 

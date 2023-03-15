@@ -30,7 +30,8 @@ namespace myfinance_web_dotnet.Domain.Services
     public List<TransacaoModel> ListarRegistros()
     {
       var result = new List<TransacaoModel>();
-      var dbSet = _dbContext.Transacao.Include(dbSet => dbSet.PlanoConta);
+      var dbSet = _dbContext.Transacao.Include(dbSet => dbSet.PlanoConta)
+        .Include(dbSet => dbSet.TipoPagamento);
 
       foreach(var item in dbSet)
       {
@@ -46,7 +47,13 @@ namespace myfinance_web_dotnet.Domain.Services
             Descricao = item.PlanoConta.Descricao,
             Tipo = item.PlanoConta.Tipo
           },
-          PlanoContaId = item.PlanoContaId
+          PlanoContaId = item.PlanoContaId,
+          ItemTipoPagamento = new TipoPagamentoModel()
+          {
+            Id = item.TipoPagamento.Id,
+            Tipo = item.TipoPagamento.Tipo
+          },
+          TipoPagamentoId = item.TipoPagamentoId
         };
 
         result.Add(itemTransacao);
@@ -65,7 +72,8 @@ namespace myfinance_web_dotnet.Domain.Services
         Data = item.Data,
         Historico = item.Historico,
         Valor = item.Valor,
-        PlanoContaId = item.PlanoContaId
+        PlanoContaId = item.PlanoContaId,
+        TipoPagamentoId = item.TipoPagamentoId
       };
 
       return itemTransacao;
@@ -81,7 +89,8 @@ namespace myfinance_web_dotnet.Domain.Services
         Data = model.Data,
         Historico = model.Historico,
         Valor = model.Valor,
-        PlanoContaId = model.PlanoContaId
+        PlanoContaId = model.PlanoContaId,
+        TipoPagamentoId = model.TipoPagamentoId
       };
 
       if (entidade.Id == null)

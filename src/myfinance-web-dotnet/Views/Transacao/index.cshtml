@@ -16,6 +16,7 @@
       <th scope="col">Valor</th>
       <th scope="col">Plano Conta</th>
       <th scope="col">Tipo Operação</th>
+      <th scope="col">Tipo Pagamento</th>
       <th scope="col"></th>
       <th scope="col"></th>
     </tr>
@@ -30,6 +31,7 @@
           <td>@item.Valor</td>
           <td>@item.ItemPlanoConta.Descricao</td>
           <td>@item.ItemPlanoConta.Tipo</td>
+          <td>@item.ItemTipoPagamento.Tipo</td>
           <td><button type="button" class="btn btn-outline-warning" onclick="updateTransacao(@item.Id.ToString())">Editar</button></td>
           <td><button type="button" class="btn btn-outline-danger" onclick="deleteTransacao(@item.Id.ToString())">Excluir</button></td>
         </tr>

@@ -13,6 +13,8 @@ builder.Services.AddScoped<IPlanoContaService, PlanoContaService>();
 
 builder.Services.AddScoped<ITransacaoService, TransacaoService>();
 
+builder.Services.AddScoped<ITipoPagamentoService, TipoPagamentoService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
